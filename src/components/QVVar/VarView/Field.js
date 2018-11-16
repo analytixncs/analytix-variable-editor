@@ -32,7 +32,7 @@ const Field = ({label, fieldValue}) => {
 
 Field.propTypes = {
   label: PropTypes.string,
-  fieldValue: PropTypes.string
+  fieldValue: PropTypes.any
 }
 
 export default Field;

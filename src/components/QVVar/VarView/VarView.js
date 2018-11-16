@@ -2,7 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import { startLoadQvVariables, getFilteredVars, getDistinctGroups } from '../../../store/qvVars';
+import { startLoadQvVariables, 
+  getFilteredVars, 
+  getDistinctGroups,
+  startUpdateQvVariable } from '../../../store/qvVars';
+
 import { updateSelectedGroup, updateTextFilter, updateLockedFilter } from '../../../store/appState';
 // import VarItem from './VarItem';
 // import VarItemDetail from './VarItemDetail';
@@ -17,10 +21,7 @@ const Wrapper = styled.div`
 `;
 
 class VarView extends React.Component {
-  state = {
-    groupFilter: '',
-    editing: false
-  }
+
   componentDidMount() {
     if (this.props.appId) {
       this.props.startLoadQvVariables(this.props.appId);
@@ -54,6 +55,7 @@ class VarView extends React.Component {
                   group={groupName} 
                   qvVariables={this.props.qvVariables[groupName]}
                   onGroupFilter={this.onGroupFilter}
+                  updateQVVariable={this.startUpdateQvVariable}
                 />
             )
           })}
@@ -75,32 +77,5 @@ export default connect(mapStateToProps, {
   startLoadQvVariables, 
   updateSelectedGroup,
   updateTextFilter,
-  updateLockedFilter })(VarView);
-
-// if(this.state.selectedVarId === qvVar.id && !this.state.editing) {
-//               return (
-//                 <VarItemDetail 
-//                   key={qvVar.id}
-//                   qvVar={qvVar}
-//                   onStartEdit={() => this.onUpdateEditState(true)}
-//                 />
-//               )
-//             }
-//             if(this.state.selectedVarId === qvVar.id && this.state.editing) {
-//               return (
-//                 <VarItemEdit
-//                   key={qvVar.id}
-//                   qvVar={qvVar}
-//                   onCancelEdit={() => this.onUpdateEditState(false)}
-//                 />
-//               )
-//             }
-//             return(
-//               <VarItem 
-//                 key={qvVar.id} 
-//                 qvVar={qvVar} 
-//                 link={() => this.props.navigate(`\\${qvVar.id}`)}
-//                 onSelectVariable={this.onSelectVariable}  
-//               />
-//             )
-//           })
+  updateLockedFilter,
+  startUpdateQvVariable })(VarView);

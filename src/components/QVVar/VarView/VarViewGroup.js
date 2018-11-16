@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { navigate } from '@reach/router';
 import styled from 'styled-components';
-import { Modal } from 'antd';
 
 import VarItem from './VarItem';
-import VarItemDetail from './VarItemDetail';
-import VarItemEdit from './VarItemEdit';
+import VarModal from './VarModal/VarModal';
+
 
 const Wrapper = styled.div`
   display: flex;
@@ -50,39 +49,28 @@ const VarViewGroup = (props) => {
       </GroupTitle>
       <VariablesWrapper>
         {props.qvVariables.map(qvVar => {
-          if(selectedVarId === qvVar.id && !editing) {
-            return (
-              <Modal 
-                title="Title"
-                visible={true}
-                onOk={() => setEditing(false)}
-                onCancel={() => setSelectedVarId(undefined)}
-              >
-                <VarItemDetail 
-                  key={qvVar.id}
-                  qvVar={qvVar}
-                  onStartEdit={() => setEditing(true)}
-                  onCancel={() => setSelectedVarId(undefined)}
-                />
-              </Modal>
-            )
-          }
-          if(selectedVarId === qvVar.id && editing) {
-            return (
-              <VarItemEdit
-                key={qvVar.id}
-                qvVar={qvVar}
-                onCancelEdit={() => setEditing(false)}
-              />
-            )
-          }
+          const visible = selectedVarId === qvVar.id ? true : false
           return(
-            <VarItem 
-              key={qvVar.id} 
-              qvVar={qvVar} 
-              link={() => navigate(`\\${qvVar.id}`)}
-              onSelectVariable={(varId) => setSelectedVarId(varId)}  
-            />
+            <React.Fragment key={qvVar.id}>
+              {!visible ? null : 
+                <VarModal
+                  key={`m-${qvVar.id}`}
+                  setEditing={setEditing}
+                  setSelectedVarId={setSelectedVarId}
+                  visible={visible}
+                  selectedVarId={selectedVarId}
+                  isEditing={editing}
+                  updateQVVariable={props.updateQVVariable}
+                  qvVar={qvVar}
+                />
+              }
+                
+              <VarItem 
+                key={qvVar.id} 
+                qvVar={qvVar} 
+                onSelectVariable={(varId) => setSelectedVarId(varId)}  
+              />
+            </React.Fragment>
           )
         })
         }
@@ -92,3 +80,29 @@ const VarViewGroup = (props) => {
 }
 
 export default VarViewGroup;
+
+
+{/* <Modal 
+title="Title"
+visible={true}
+onOk={() => setEditing(false)}
+onCancel={() => setSelectedVarId(undefined)}
+>
+<VarItemDetail 
+  key={qvVar.id}
+  qvVar={qvVar}
+  onStartEdit={() => setEditing(true)}
+  onCancel={() => setSelectedVarId(undefined)}
+/>
+</Modal> */}
+
+
+{/* <VarModal
+key={`m-${qvVar.id}`}
+setEditing={setEditing}
+setSelectedVarId={setSelectedVarId}
+visible={selectedVarId ? true : false}
+selectedVarId={selectedVarId}
+isEditing={editing}
+qvVar={qvVar}
+/> */}
