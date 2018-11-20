@@ -20,6 +20,8 @@ const Wrapper = styled.div`
   margin: 10px;
 `;
 
+export const AppStateContext = React.createContext();
+
 class VarView extends React.Component {
 
   componentDidMount() {
@@ -38,9 +40,8 @@ class VarView extends React.Component {
 
   render() {
     return (
-      <div>
+      <AppStateContext.Provider value={{groups: this.props.groups}}>
         <FilterBar
-          groups={this.props.groups}
           groupFilter={this.props.appState.groupFilter}
           textFilter={this.props.appState.textFilter}
           onGroupFilter={this.onGroupFilter}
@@ -52,15 +53,15 @@ class VarView extends React.Component {
             return (
                 <VarViewGroup 
                   key={groupName}
-                  group={groupName} 
+                  group={groupName}
                   qvVariables={this.props.qvVariables[groupName]}
                   onGroupFilter={this.onGroupFilter}
-                  updateQVVariable={this.startUpdateQvVariable}
+                  updateQVVariable={this.props.startUpdateQvVariable}
                 />
             )
           })}
         </Wrapper>
-      </div>
+      </AppStateContext.Provider>
     )
   } 
 }

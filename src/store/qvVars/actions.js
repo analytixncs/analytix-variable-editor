@@ -26,8 +26,8 @@ const loadQvVariables = (qvVariables) => {
 
 export const startUpdateQvVariable = (qvVariable) => {
   return (dispatch) => {
-    updateQlikVariable(qvVariable)
-      .then(result => dispatch(updateQvVariable))
+    return updateQlikVariable(qvVariable)
+      .then(result => dispatch(updateQvVariable(qvVariable)))
   }
 }
 

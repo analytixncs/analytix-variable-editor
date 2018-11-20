@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 // import DatePicker from 'antd/lib/date-picker';  // for js
 // import 'antd/lib/date-picker/style/css';        // for css
 import { Select, Input, Icon, Checkbox } from 'antd';
+
+import { AppStateContext } from './VarView';
+
 const Option = Select.Option;
 
 const Wrapper = styled.div`
@@ -20,7 +23,7 @@ const SelectWrapper = styled(Select)`
   width: 200px;
 `;
 const InputWrapper = styled.div`
-  width: 150px;
+  width: 250px;
   position: relative
 `;
 const IconWrap = styled(Icon)`
@@ -35,8 +38,8 @@ const IconWrap = styled(Icon)`
 `;
 
 const FilterBar = (props) => {
-  
-  const options = props.groups.map(groupName => <Option key={groupName}>{groupName}</Option>)
+  const { groups } = useContext(AppStateContext)
+  const options = groups.map(groupName => <Option key={groupName}>{groupName}</Option>)
   const _onGroupFilter = (value) => props.onGroupFilter(value);
   const _onTextFilter = (value) => props.onTextFilter(value.target.value);
   const _onLockedFilter = (value) => props.onLockedFilter(value.target.checked);
