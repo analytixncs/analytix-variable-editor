@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import styledNormalize from 'styled-normalize'
 import { createGlobalStyle } from 'styled-components'
 //--Ant Design css load

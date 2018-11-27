@@ -20,31 +20,21 @@ const Toolbar = styled.div`
   grid-area: toolbar;
   background: #d6ebf8;
   border-bottom: 1px solid #9e9e9e;
-  ${'' /* grid-column: 1/3;
-  grid-row: 1/2; */}
-  ${'' /* position: fixed;
-  width: 100%;
-  top: 50;
-  z-index: 2; */}
 `;
 
 const Aside = styled.div`
   grid-area: aside;
-  ${'' /* grid-column: 1/2;
-  grid-row: 2/3; */}
   border-right: 1px solid gray;
   background: #d6ebf8;
 `;
 const VarArea = styled.div`
   grid-area: content;
   overflow: auto;
-  ${'' /* grid-column: 2/3;
-  grid-row: 2/3; */}
 `;
 
 class QvVariables extends React.Component {
   render() {
-    console.log('QvVariables Props', this.props)
+    //console.log('QvVariables Props', this.props)
     return (
       <Grid>
         <Toolbar>

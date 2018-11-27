@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { Select, Modal, Input, Button, Icon, Checkbox } from 'antd';
 
@@ -57,6 +57,8 @@ const VarModal = (props) => {
   let [expression, setExpression] = useState(props.qvVar.expression);
   let [notes, setNotes] = useState(props.qvVar.notes);
   let [locked, setLocked] = useState(props.qvVar.locked);
+  // Get context information
+  const { groups } = useContext(AppStateContext);
 
   const onUpdateQVVariable = () => {
     let updatedQVVar = {
@@ -87,37 +89,31 @@ const VarModal = (props) => {
       width="50%"
       onCancel={() => setSelectedVarId(undefined)}
       footer={[
-       <ButtonWrapper key='buttons'>
+        <ButtonWrapper key='buttons'>
           <Button key="cancel" onClick={onClose}>Close</Button>
           <Button key="save" disabled={!isEditing} type="primary" onClick={onUpdateQVVariable}>Save</Button>
-       </ButtonWrapper>
-  ]}
+        </ButtonWrapper>
+      ]}
     >
       <Wrapper>
-        <AppStateContext.Consumer>
-        {({ groups }) => {
-          return (
-            <InputWrapper>
-              <Label>Group</Label>
-              <SelectWrapper
-                disabled={!isEditing}
-                placeholder="Group Filter"
-                onChange={setGroup}
-                value={group}
-              >
-                {groups.map(groupName => <Select.Option key={groupName}>{groupName}</Select.Option>)}
-              </SelectWrapper>
-              <EditButton
-                icon={isEditing ? "rollback" : "edit"}
-                onClick={() => setEditing(!isEditing)}
-              >
-                {isEditing ? "Cancel" : "Edit"}
-              </EditButton>
-            </InputWrapper>
-          );
-          }
-        }
-        </AppStateContext.Consumer>
+        <InputWrapper>
+          <Label>Group</Label>
+          <SelectWrapper
+            disabled={!isEditing}
+            placeholder="Group Filter"
+            onChange={setGroup}
+            value={group}
+          >
+            {groups.map(groupName => <Select.Option key={groupName}>{groupName}</Select.Option>)}
+          </SelectWrapper>
+          <EditButton
+            icon={isEditing ? "rollback" : "edit"}
+            onClick={() => setEditing(!isEditing)}
+          >
+            {isEditing ? "Cancel" : "Edit"}
+          </EditButton>
+        </InputWrapper>
+
         <InputWrapper>
           <Label>Variable Name</Label>
           <Input 
