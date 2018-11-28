@@ -5,7 +5,7 @@ import { createGlobalStyle } from 'styled-components'
 import '../node_modules/antd/dist/antd.min.css';
 // import 'semantic-ui-css/semantic.min.css';
 
-import {Router, navigate, createMemorySource, createHistory, LocationProvider } from '@reach/router';
+import {Router, createMemorySource, createHistory, LocationProvider } from '@reach/router';
 import {Provider} from 'react-redux';
 
 import Main from './components/Main';
@@ -33,9 +33,7 @@ const GlobalStyle = createGlobalStyle`
 const Error = (props) => {console.log(props); return (<div>Route not implemented -- {props.uri}</div>)};
 
 class App extends React.Component {
-  componentDidMount() {
-    navigate("/qvvar/salesflash")
-  }
+
   render() {
     let source = createMemorySource("/");
     let history = createHistory(source);

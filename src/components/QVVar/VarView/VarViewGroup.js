@@ -34,10 +34,7 @@ const VariablesWrapper = styled.div`
   grid-gap: 1rem;
   justify-content: space-between;
 `;
-// const VariablesWrapper = styled.div`
-//   display: flex;
-//   flex-wrap: wrap;
-// `;
+
 const VarViewGroup = (props) => {
   const [selectedVarId, setSelectedVarId] = useState(undefined);
   const [editing, setEditing] = useState(false);
@@ -80,29 +77,3 @@ const VarViewGroup = (props) => {
 }
 
 export default VarViewGroup;
-
-
-{/* <Modal 
-title="Title"
-visible={true}
-onOk={() => setEditing(false)}
-onCancel={() => setSelectedVarId(undefined)}
->
-<VarItemDetail 
-  key={qvVar.id}
-  qvVar={qvVar}
-  onStartEdit={() => setEditing(true)}
-  onCancel={() => setSelectedVarId(undefined)}
-/>
-</Modal> */}
-
-
-{/* <VarModal
-key={`m-${qvVar.id}`}
-setEditing={setEditing}
-setSelectedVarId={setSelectedVarId}
-visible={selectedVarId ? true : false}
-selectedVarId={selectedVarId}
-isEditing={editing}
-qvVar={qvVar}
-/> */}

@@ -49,7 +49,7 @@ const EditButton = styled(Button)`
 `;
 
 const VarModal = (props) => {
-  let { setEditing, setSelectedVarId, updateQVVariable, isEditing, selectedVarId, visible } = props;
+  let { setEditing, setSelectedVarId, updateQVVariable, isEditing, visible } = props;
   // Create local state variables
   let [group, setGroup] = useState(props.qvVar.group);
   let [name, setName] = useState(props.qvVar.name);
@@ -71,7 +71,6 @@ const VarModal = (props) => {
       locked,
       modifyDate: currentUnixMoment()
     }
-    console.log("updated QVVAr", updatedQVVar)
     updateQVVariable(updatedQVVar)
     setEditing(false)
     setSelectedVarId(undefined)
@@ -122,6 +121,7 @@ const VarModal = (props) => {
             onChange={(e) => setName(e.target.value)}
           />
         </InputWrapper>
+
         <InputWrapper>
           <Label>Description</Label>
           <Input.TextArea
@@ -140,8 +140,9 @@ const VarModal = (props) => {
         </InputWrapper>
         <InputWrapper>
           <Label>Notes</Label>
-          <Input
+          <Input.TextArea
             disabled={!isEditing}
+            autosize
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
           />

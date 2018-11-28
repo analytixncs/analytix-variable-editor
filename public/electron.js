@@ -8,11 +8,12 @@ const isDev = require('electron-is-dev');
 let mainWindow;
 
 function createWindow() {
+  console.log( path.join(__dirname, '../assets/icons/png/48x48.png'))
   mainWindow = new BrowserWindow({
     width: 1080,
     height: 800,
     show: false,
-    icon: path.join(__dirname, 'assets/icon.ico'),
+    icon: path.join(__dirname, '../assets/icons/png/64x64.png'),
     webPreferences : { backgroundThrottling: false },
     title: 'Analytix Variable Editor'
   });
@@ -30,7 +31,7 @@ function createWindow() {
   // Set up dev tools if in development mode development is for work computer, dev-home is for home computer
   if (isDev) {
     BrowserWindow.addDevToolsExtension('C:/Users/mark.mccoid/AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/3.4.3_0');
-    BrowserWindow.addDevToolsExtension('C:/Users/mark.mccoid/AppData/Local/Google/Chrome/User Data/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.15.5_1');
+    BrowserWindow.addDevToolsExtension('C:/Users/mark.mccoid/AppData/Local/Google/Chrome/User Data/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.16.2_0');
     //--- Home
     // BrowserWindow.addDevToolsExtension(`C:/Users/Mark/AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/3.4.3_0`);
     // BrowserWindow.addDevToolsExtension(`C:/Users/Mark/AppData/Local/Google/Chrome/User Data/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.15.4_1`);
