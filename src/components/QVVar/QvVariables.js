@@ -13,7 +13,7 @@ const Grid = styled.div`
   grid-template-columns: 200px auto;
   grid-template-rows: 40px auto;
   grid-template-areas: "toolbar toolbar"
-                       "aside content";
+                       "content content";
 `;
 
 const Toolbar = styled.div`
@@ -39,12 +39,12 @@ class QvVariables extends React.Component {
       <Grid>
         <Toolbar>
           <Router>
-            <VarToolbar path=":appId/*"/>
+            <VarToolbar path="*"/>
           </Router>
         </Toolbar>
-        <Aside>
+        {/* <Aside>
           <VarSidebar routerPath={this.props.location.pathname}/>
-        </Aside>
+        </Aside> */}
         <VarArea>
           {this.props.children}
         </VarArea>

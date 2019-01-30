@@ -1,0 +1,12 @@
+Colors:
+
+https://www.color-hex.com/color/96a169
+
+
+#96a169 - Main
+
+#dfe2d2 - light background
+
+#3c402a - Dark border
+
+#697049 - Header

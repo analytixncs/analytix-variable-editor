@@ -1,5 +1,5 @@
 const electron = require('electron');
-const { app, BrowserWindow, Menu, dialog } = electron;
+const {app, BrowserWindow, Menu, dialog} = electron;
 //const BrowserWindow = electron.BrowserWindow
 
 const path = require('path');
@@ -8,44 +8,52 @@ const isDev = require('electron-is-dev');
 let mainWindow;
 
 function createWindow() {
-  console.log( path.join(__dirname, '../assets/icons/png/48x48.png'))
+  console.log(path.join(__dirname, '../assets/icons/png/48x48.png'))
   mainWindow = new BrowserWindow({
     width: 1080,
     height: 800,
     show: false,
     icon: path.join(__dirname, '../assets/icons/png/64x64.png'),
-    webPreferences : { backgroundThrottling: false },
+    webPreferences: {
+      backgroundThrottling: false
+    },
     title: 'Analytix Variable Editor'
   });
-  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
+  mainWindow.loadURL(isDev
+    ? 'http://localhost:3000'
+    : `file://${path.join(__dirname, '../build/index.html')}`);
   //Attach the main Menu
   const mainMenu = Menu.buildFromTemplate(menuTemplate);
   Menu.setApplicationMenu(mainMenu);
-  
+
   // Only show when window is ready
   mainWindow.on('ready-to-show', () => {
     mainWindow.show();
   });
   // Clear memory when window closed
   mainWindow.on('closed', () => mainWindow = null);
-  // Set up dev tools if in development mode development is for work computer, dev-home is for home computer
+  // Set up dev tools if in development mode development is for work computer,
+  // dev-home is for home computer
   if (isDev) {
-    BrowserWindow.addDevToolsExtension('C:/Users/mark.mccoid/AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/3.4.3_0');
-    BrowserWindow.addDevToolsExtension('C:/Users/mark.mccoid/AppData/Local/Google/Chrome/User Data/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.16.2_0');
-    //--- Home
-    // BrowserWindow.addDevToolsExtension(`C:/Users/Mark/AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/3.4.3_0`);
-    // BrowserWindow.addDevToolsExtension(`C:/Users/Mark/AppData/Local/Google/Chrome/User Data/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.15.4_1`);
+    BrowserWindow.addDevToolsExtension('C:/Users/mark.mccoid/AppData/Local/Google/Chrome/User Data/Default/Extensions/fm' +
+        'kadmapgofadopljbjfkapdkoienihi/3.6.0_1');
+    BrowserWindow.addDevToolsExtension('C:/Users/mark.mccoid/AppData/Local/Google/Chrome/User Data/Default/Extensions/lm' +
+        'hkpmbekcpmknklioeibfkpmmfibljd/2.17.0_1');
+    // --- Home
+    // BrowserWindow.addDevToolsExtension(`C:/Users/Mark/AppData/Local/Google/Chrome
+    // / User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/3.4.3_0`);
+    // BrowserWindow.addDevToolsExtension(`C:/Users/Mark/AppData/Local/Google/Chrome
+    // / User Data/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.15.4_1`);
     mainWindow.toggleDevTools();
   }
 }
 
-
 // Create window when app is 'ready'
 app.on('ready', createWindow);
 
-//------------------------------------------------
-//Setup Help window function to show help from menu
-//The showUserGuide function is called from the Help/User Guide menu option
+// ------------------------------------------------ Setup Help window function
+// to show help from menu The showUserGuide function is called from the
+// Help/User Guide menu option
 let helpWindow;
 const showUserGuide = () => {
   //If helpWindow already defined, give it focus and leave function
@@ -67,16 +75,21 @@ const showUserGuide = () => {
   //Load help file HTML file into BrowserWindow
   helpWindow.loadURL(`file://${__dirname}/public/VariableEditorHelp.html`);
 };
-//------------------------------------------------
-
-//------------------------------------------
-const exitAccelerator = process.platform === 'darwin' ? 'Command+Q' : 'Ctrl+Q';
+// ------------------------------------------------
+// ------------------------------------------
+const exitAccelerator = process.platform === 'darwin'
+  ? 'Command+Q'
+  : 'Ctrl+Q';
 const devMenu = {
   label: 'Dev',
   submenu: [
-    {role: 'reload'},
-    {role: 'forcereload'},
-    {role: 'toggledevtools'}
+    {
+      role: 'reload'
+    }, {
+      role: 'forcereload'
+    }, {
+      role: 'toggledevtools'
+    }
   ]
 };
 
@@ -92,8 +105,7 @@ let menuTemplate = [
         }
       }
     ]
-  },
-  {
+  }, {
     label: 'Help',
     submenu: [
       {
@@ -101,9 +113,9 @@ let menuTemplate = [
         click() {
           showUserGuide();
         }
-      },
-      {type: 'separator'},
-      {
+      }, {
+        type: 'separator'
+      }, {
         label: 'About',
         click() {
           let message = 'Analytix Variable Editor v1.0';
@@ -114,9 +126,8 @@ let menuTemplate = [
   }
 ];
 
-//Add a 'Dev' menu option if in development mode
-//if (isDev) {
-  menuTemplate.push(devMenu);
+//Add a 'Dev' menu option if in development mode if (isDev) {
+menuTemplate.push(devMenu);
 //}
 
 if (process.platform === 'darwin') {

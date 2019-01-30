@@ -1,10 +1,8 @@
 import React from 'react';
-import { Link, Router, navigate } from '@reach/router';
+import { Link, Router } from '@reach/router';
 import styled from 'styled-components';
 import { Icon, Select } from 'antd';
 
-import VarTest from './VarTest';
-import { getApplicationNames } from '../../../fileAccessAPI/nativeFileAccess';
 /*
 * The Toolbar component sits inside the Toolbar Grid cell
 * To make the flex centering work, I added a height to the Nav styled div
@@ -64,45 +62,18 @@ const NavLink = styled(MyNavLink)`
 `;
 
 class VarToolbar extends React.Component {
-  state = {
-    applicationNames: []
-  }
-  componentDidMount() {
-    getApplicationNames().then(result => this.setState({ applicationNames: result }))
-  }
-  handleAppChange = (value) => {
-    
-    console.log('Appid change value', `${value}`)
-    if (value) {
-      // Since using the props navigate we can use relative paths
-      this.props.navigate(`${value}`)
-    } else {
-      this.props.navigate('/qvvar')
-    }
-  }
   render() {
-     console.log('varToolBar: ', this.props)
-    // const activePath = this.props.location.pathname;
-    // const activeLink = activePath.includes('add')
-    //   ? 'add'
-    //   : (activePath.includes('export')
-    //     ? 'export'
-    //     : 'root');
-    // console.log('varToolBar-link: ', activeLink)
+    console.log('varToolBar: ', this.props)
+    const activePath = this.props.location.pathname;
+    const activeLink = activePath.includes('add')
+      ? 'add'
+      : (activePath.includes('export')
+        ? 'export'
+        : 'root');
+    console.log('varToolBar-link: ', activeLink)
     return (
       <Nav>
-
-        <Select allowClear style={{ width: 120 }} onChange={this.handleAppChange}>
-          {
-            this.state.applicationNames.map(appName => (
-              <Select.Option key={appName} value={appName.toLowerCase()}>{appName}</Select.Option>
-            ))
-          }
-        </Select>
-        <Router>
-            <VarTest path=":appId/*"/>
-        </Router>
-        {/* <NavLink to="./">Variable
+        <NavLink to="./">Variable
           <Icon type={activeLink === 'root'
             ? "down"
             : "right"}/></NavLink>
@@ -114,7 +85,7 @@ class VarToolbar extends React.Component {
           <Icon
             type={activeLink === 'export'
             ? "down"
-            : "right"}/></NavLink> */}
+            : "right"}/></NavLink>
       </Nav>
     )
   }
