@@ -126,22 +126,15 @@ const VarModal = (props) => {
     }}
       width="50%"
       onCancel={() => setSelectedVarId(undefined)}
-      footer={[< ButtonWrapper key = 'buttons' > <Popconfirm
-      key="cancel"
-      title="Lose changes without saving?"
-      onConfirm={onClose}
-      okText="Close"
-      cancelText="Return">
-      <Button onClick={() => isEditing
-        ? null
-        : onClose}>Close</Button>
-    </Popconfirm> < MyAlert title = "Close and lose changes?" okButtonText = "Yes, Close" cancelButtonText = "Cancel it" type = "question" onConfirm = {
-        isEditing
-          ? null
-          : onClose
-      } > {
-        (onConfirm) => <Button onClick={onConfirm}>Close</Button>
-      } < /MyAlert> <Button key="save" disabled={!isEditing} type="primary" onClick={onUpdateQVVariable}>Save</Button > </ButtonWrapper>]}>
+      footer={[<ButtonWrapper key = 'buttons' > 
+          <MyAlert title = "Close and lose changes?" okButtonText = "Yes, Close" cancelButtonText = "Cancel it" type = "question" 
+            onConfirm = {isEditing ? null : onClose}
+          > 
+            {(onConfirm) => <Button onClick={onConfirm}>Close</Button>} 
+          </MyAlert> 
+          <Button key="save" disabled={!isEditing} type="primary" onClick={onUpdateQVVariable}>Save</Button> 
+        </ButtonWrapper>]}
+      >
       <Wrapper>
         <InputWrapper>
           <Label>Group</Label>

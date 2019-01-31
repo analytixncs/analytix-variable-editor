@@ -13,9 +13,10 @@ import { getApplicationNames } from '../../../fileAccessAPI/nativeFileAccess';
 const Nav = styled.div `
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
+  margin-left: 10px;
   height: 39px; {/*1 minus grid height*/}
   position: relative;
 `;
@@ -82,17 +83,10 @@ class VarToolbar extends React.Component {
   }
   render() {
      console.log('varToolBar: ', this.props)
-    // const activePath = this.props.location.pathname;
-    // const activeLink = activePath.includes('add')
-    //   ? 'add'
-    //   : (activePath.includes('export')
-    //     ? 'export'
-    //     : 'root');
-    // console.log('varToolBar-link: ', activeLink)
     return (
       <Nav>
 
-        <Select allowClear style={{ width: 120 }} onChange={this.handleAppChange}>
+        <Select allowClear style={{ width: 200, marginRight: 20 }} onChange={this.handleAppChange}>
           {
             this.state.applicationNames.map(appName => (
               <Select.Option key={appName} value={appName.toLowerCase()}>{appName}</Select.Option>
@@ -100,21 +94,8 @@ class VarToolbar extends React.Component {
           }
         </Select>
         <Router>
-            <VarTest path=":appId/*"/>
+          <VarTest path=":appId/*"/>
         </Router>
-        {/* <NavLink to="./">Variable
-          <Icon type={activeLink === 'root'
-            ? "down"
-            : "right"}/></NavLink>
-        <NavLink to="varadd">Add Variable
-          <Icon type={activeLink === 'add'
-            ? "down"
-            : "right"}/></NavLink>
-        <NavLink to="varexport">Export
-          <Icon
-            type={activeLink === 'export'
-            ? "down"
-            : "right"}/></NavLink> */}
       </Nav>
     )
   }
